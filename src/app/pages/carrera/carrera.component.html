@@ -1,0 +1,41 @@
+<div class="container">
+    <table class="table table-responsive table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of lCarrera">
+                <td>{{data.identificador}}</td>
+                <td>{{data.nombre}}</td>
+                <td>{{data.descripcion}}</td>
+                <td>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="container">
+    <form [formGroup]="fCarrera">
+        <div class="row">
+            <div class="col mb-3">
+                <label for="inIdentificador" class="form-label">Identificador</label>
+                <input type="text" class="form-control" formControlName="identificador" id="inIdentificador">
+            </div>
+            <div class="col mb-3">
+                <label for="inNombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" formControlName="nombre" id="inNombre">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="inDescripcion" class="form-label">Descripcion</label>
+            <input type="text" class="form-control" formControlName="descripcion" id="inDescripcion">
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="update()">Submit</button>
+    </form>
+</div>
