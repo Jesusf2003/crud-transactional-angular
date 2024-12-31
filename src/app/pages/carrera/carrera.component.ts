@@ -12,7 +12,7 @@ import { TbCarrera } from '../../services/model/carrera.model';
         ReactiveFormsModule
     ],
     templateUrl: './carrera.component.html',
-    styleUrl: './carrera.component.css'
+    styleUrls: ['./carrera.component.css']
 })
 export class CarreraComponent implements OnInit {
 

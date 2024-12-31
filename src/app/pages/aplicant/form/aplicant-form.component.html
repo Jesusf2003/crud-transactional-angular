@@ -1,0 +1,50 @@
+<div class="modal-header">
+    <div class="form-container">
+        <h3 class="title">
+            {{isEditable ? 'Actualizar' : 'Guardar'}}
+        </h3>
+    </div>
+    <button type="button" class="btn-close" (click)="msActive.close()"></button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="fAplicant" (ngSubmit)="submitFunction()">
+        <div class="row mb-4">
+            <div class="col">
+                <input type="text" class="form-control" formControlName="names" placeholder="Nombres">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" formControlName="surnames" placeholder="Apellidos">
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <select class="form-select" formControlName="sex" (change)="changeOption($event)">
+                    <option value="" disabled selected>Seleccionar</option>
+                    <option value="M">Hombre</option>
+                    <option value="F">Mujer</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" formControlName="identificationDocument" placeholder="Documento">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" formControlName="documentNumber" placeholder="Nro. documento">
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col">
+                <input type="text" class="form-control" formControlName="email" placeholder="Correo">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" formControlName="cellphone" placeholder="Teléfono">
+            </div>
+        </div>
+        <div class="row mb-auto">
+            <div class="col">
+                <button type="submit" class="btn btn-primary" [disabled]="fAplicant.invalid">
+                    {{isEditable ? 'Actualizar' : 'Guardar'}}
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

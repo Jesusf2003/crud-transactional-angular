@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 
-export abstract class GenericCrudService<T> {
+export abstract class GenericCrud<T> {
     baseUrl: string = '';
 
     constructor(protected http: HttpClient, baseUrl: string) {
