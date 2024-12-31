@@ -1,25 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { AplicantService } from '../../services/aplicant.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AplicantFormComponent } from './form/aplicant-form.component';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { AdviserService } from '../../services/adviser.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
+import { AdviserFormComponent } from './form/adviser-form.component';
 
 @Component({
-    selector: 'app-aplicant',
+    selector: 'app-adviser',
     standalone: true,
     imports: [
         CommonModule
     ],
-    templateUrl: './aplicant.component.html',
-    styleUrl: './aplicant.component.css'
+    templateUrl: './adviser.component.html',
+    styleUrl: './adviser.component.css'
 })
-export class AplicantComponent implements OnInit {
+export class AdviserComponent implements OnInit {
 
-    lAplicant: any[] = [];
+    lAdviser: any[] = [];
 
     constructor(
-        private sAplicant: AplicantService,
+        private sAdviser: AdviserService,
         private sModal: NgbModal
     ) {}
 
@@ -28,32 +28,31 @@ export class AplicantComponent implements OnInit {
     }
 
     showAll(): void {
-        this.sAplicant.getAll().subscribe(res => {
-            this.lAplicant = res;
+        this.sAdviser.getAll().subscribe(res => {
+            this.lAdviser = res;
         });
     }
 
     delete(id: number): void {
         Swal.fire({
-            title: "¿Estás seguro de que quieres eliminar a este aplicante?",
+            title: "¿Estás seguro de que quieres eliminar a este asesor?",
             showDenyButton: true,
             confirmButtonText: `Eliminar`,
             denyButtonText: `Cancelar`,
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire('Aplicante eliminado', '', 'info');
-                this.sAplicant.setDelete(id).subscribe(() => {
+                Swal.fire('Asesor eliminado', '', 'info');
+                this.sAdviser.setDelete(id).subscribe(() => {
                     this.ngOnInit();
                 })
             } else {
                 Swal.fire('Cancelando acción', '', 'info');
             }
-        });
-        
+        })
     }
 
     openSaveForm() {
-        this.sModal.open(AplicantFormComponent,
+        this.sModal.open(AdviserFormComponent,
             {
                 centered: true,
                 backdrop: 'static'
@@ -64,15 +63,15 @@ export class AplicantComponent implements OnInit {
     }
 
     openEditForm(data: any) {
-        const updateData = this.sModal.open(AplicantFormComponent,
+        const updateData = this.sModal.open(AdviserFormComponent,
             {
                 centered: true,
                 backdrop: 'static'
             }
         );
-        updateData.componentInstance.data = { obj: data, isEditable: true };
+        updateData.componentInstance.data = {obj: data, isEditable: true};
         updateData.result.then(() => {
             this.ngOnInit();
-        })
+        });
     }
 }

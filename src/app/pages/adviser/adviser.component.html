@@ -7,7 +7,6 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Nombres</th>
-            <th scope="col">Sexo</th>
             <th scope="col">Tipo de documento</th>
             <th scope="col">Documento</th>
             <th scope="col">Correo</th>
@@ -16,10 +15,9 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let data of lAplicant">
+        <tr *ngFor="let data of lAdviser">
             <td>{{data.id}}</td>
             <td>{{data.surnames}}, {{data.names}}</td>
-            <td>{{data.sex}}</td>
             <td>{{data.identificationDocument}}</td>
             <td>{{data.documentNumber}}</td>
             <td>{{data.email}}</td>

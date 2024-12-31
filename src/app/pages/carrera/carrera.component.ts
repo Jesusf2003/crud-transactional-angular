@@ -38,7 +38,6 @@ export class CarreraComponent implements OnInit {
     showAll(): void {
         this.sCarrera.getAll().subscribe(res => {
             this.lCarrera = res;
-            console.log(this.lCarrera);
         })
     }
 

@@ -1,50 +1,47 @@
-import { Component, Input, OnDestroy, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { TbAplicant } from "../../../services/model/aplicant.model";
-import { AplicantService } from "../../../services/aplicant.service";
-import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { CommonModule } from "@angular/common";
+import { Component, Input, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { TbAdviser } from "../../../services/model/adviser.model";
+import { AdviserService } from "../../../services/adviser.service";
+import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
-    selector: 'app-aplicant-form',
+    selector: 'app-adviser-form',
     standalone: true,
     imports: [
         CommonModule,
         ReactiveFormsModule
     ],
-    templateUrl: './aplicant-form.component.html',
-    styleUrls: ['./aplicant-form.component.css']
+    templateUrl: './adviser-form.component.html',
+    styleUrls: ['./adviser-form.component.css']
 })
-export class AplicantFormComponent implements OnInit {
+export class AdviserFormComponent implements OnInit {
 
-    fAplicant!: FormGroup;
-    mAplicant!: TbAplicant;
+    fAdviser!: FormGroup;
+    mAdviser!: TbAdviser;
     isEditable: boolean = false;
     @Input() data: any;
 
     constructor(
         private fb: FormBuilder,
-        public sAplicant: AplicantService,
-        public msActive: NgbActiveModal
+        public sAdviser: AdviserService,
+        public msAdviser: NgbActiveModal
     ) { }
 
     ngOnInit(): void {
-        this.fAplicant = this.fb.group({
+        this.fAdviser = this.fb.group({
             names: ['', [Validators.required]],
             surnames: ['', [Validators.required]],
-            sex: ['', [Validators.required]],
             identificationDocument: ['', [Validators.required, Validators.minLength(3)]],
             documentNumber: ['', [Validators.required, Validators.minLength(8)]],
             email: ['', [Validators.required, Validators.email]],
-            cellphone: ['', [Validators.required]]
+            cellphone: ['', [Validators.required]],
         });
-        
         this.isEditable = this.data?.isEditable || false;
         if (this.isEditable === true) {
-            this.fAplicant.patchValue({
+            this.fAdviser.patchValue({
                 names: this.data.obj.names,
                 surnames: this.data.obj.surnames,
-                sex: this.data.obj.sex,
                 identificationDocument: this.data.obj.identificationDocument,
                 documentNumber: this.data.obj.documentNumber,
                 email: this.data.obj.email,
@@ -54,11 +51,7 @@ export class AplicantFormComponent implements OnInit {
         }
     }
 
-    changeOption(e: any) {
-        this.fAplicant.get("sex")?.setValue(e.target.value)
-    }
-
-    submitFunction(): void {
+    submitFunction() {
         if (this.isEditable === true) {
             this.update();
         } else {
@@ -67,16 +60,16 @@ export class AplicantFormComponent implements OnInit {
     }
 
     save(): void {
-        this.mAplicant = { ...this.fAplicant.value };
-        this.sAplicant.create(this.mAplicant).subscribe(() => {
-            this.msActive.close();
-        });
+        this.mAdviser = { ...this.fAdviser.value };
+        this.sAdviser.create(this.mAdviser).subscribe(() => {
+            this.msAdviser.close();
+        })
     }
 
     update(): void {
-        this.mAplicant = { ...this.fAplicant.value, "state": this.data.obj.state };
-        this.sAplicant.update(this.data.obj.id, this.mAplicant).subscribe(() => {
-            this.msActive.close();
+        this.mAdviser = { ...this.fAdviser.value, state: this.data.obj.state };
+        this.sAdviser.update(this.data.obj.id, this.mAdviser).subscribe(() => {
+            this.msAdviser.close();
         });
     }
 }
