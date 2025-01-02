@@ -7,7 +7,7 @@
     <button type="button" class="btn-close" (click)="msActive.close()"></button>
 </div>
 <div class="modal-body">
-    <form [formGroup]="fAplicant" (ngSubmit)="submitFunction()">
+    <form [formGroup]="fApplicant" (ngSubmit)="submitFunction()">
         <div class="row mb-4">
             <div class="col">
                 <input type="text" class="form-control" formControlName="names" placeholder="Nombres">
@@ -41,7 +41,7 @@
         </div>
         <div class="row mb-auto">
             <div class="col">
-                <button type="submit" class="btn btn-primary" [disabled]="fAplicant.invalid">
+                <button type="submit" class="btn btn-primary" [disabled]="fApplicant.invalid">
                     {{isEditable ? 'Actualizar' : 'Guardar'}}
                 </button>
             </div>

@@ -1,0 +1,48 @@
+<div class="btn-group" role="group">
+    <button type="button" class="btn btn-primary" (click)="openSaveForm()">Insertar</button>
+</div>
+
+<table class="table table-responsive table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombres</th>
+            <th scope="col">Sexo</th>
+            <th scope="col">Tipo de documento</th>
+            <th scope="col">Documento</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Teléfono</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of lApplicant">
+            <td>{{data.id}}</td>
+            <td>{{data.surnames}}, {{data.names}}</td>
+            <td>{{data.sex}}</td>
+            <td>{{data.identificationDocument}}</td>
+            <td>{{data.documentNumber}}</td>
+            <td>{{data.email}}</td>
+            <td>{{data.cellphone}}</td>
+            <td class="text-center">
+                <div class="dropdown">
+                    <a data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li>
+                            <a class="dropdown-item" (click)="delete(data.id)">
+                                <i class="bi bi-trash"></i> Eliminar
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" (click)="openEditForm(data)">
+                                <i class="bi bi-pencil-fill"></i> Editar
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

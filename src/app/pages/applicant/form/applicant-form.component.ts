@@ -1,35 +1,35 @@
 import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { TbAplicant } from "../../../services/model/aplicant.model";
-import { AplicantService } from "../../../services/aplicant.service";
+import { TbApplicant } from "../../../services/model/applicant.model";
+import { ApplicantService } from "../../../services/applicant.service";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { CommonModule } from "@angular/common";
 
 @Component({
-    selector: 'app-aplicant-form',
+    selector: 'app-applicant-form',
     standalone: true,
     imports: [
         CommonModule,
         ReactiveFormsModule
     ],
-    templateUrl: './aplicant-form.component.html',
-    styleUrls: ['./aplicant-form.component.css']
+    templateUrl: './applicant-form.component.html',
+    styleUrls: ['./applicant-form.component.css']
 })
-export class AplicantFormComponent implements OnInit {
+export class ApplicantFormComponent implements OnInit {
 
-    fAplicant!: FormGroup;
-    mAplicant!: TbAplicant;
+    fApplicant!: FormGroup;
+    mApplicant!: TbApplicant;
     isEditable: boolean = false;
     @Input() data: any;
 
     constructor(
         private fb: FormBuilder,
-        public sAplicant: AplicantService,
+        public sApplicant: ApplicantService,
         public msActive: NgbActiveModal
     ) { }
 
     ngOnInit(): void {
-        this.fAplicant = this.fb.group({
+        this.fApplicant = this.fb.group({
             names: ['', [Validators.required]],
             surnames: ['', [Validators.required]],
             sex: ['', [Validators.required]],
@@ -41,7 +41,7 @@ export class AplicantFormComponent implements OnInit {
         
         this.isEditable = this.data?.isEditable || false;
         if (this.isEditable === true) {
-            this.fAplicant.patchValue({
+            this.fApplicant.patchValue({
                 names: this.data.obj.names,
                 surnames: this.data.obj.surnames,
                 sex: this.data.obj.sex,
@@ -55,7 +55,7 @@ export class AplicantFormComponent implements OnInit {
     }
 
     changeOption(e: any) {
-        this.fAplicant.get("sex")?.setValue(e.target.value)
+        this.fApplicant.get("sex")?.setValue(e.target.value)
     }
 
     submitFunction(): void {
@@ -67,15 +67,15 @@ export class AplicantFormComponent implements OnInit {
     }
 
     save(): void {
-        this.mAplicant = { ...this.fAplicant.value };
-        this.sAplicant.create(this.mAplicant).subscribe(() => {
+        this.mApplicant = { ...this.fApplicant.value };
+        this.sApplicant.create(this.mApplicant).subscribe(() => {
             this.msActive.close();
         });
     }
 
     update(): void {
-        this.mAplicant = { ...this.fAplicant.value, "state": this.data.obj.state };
-        this.sAplicant.update(this.data.obj.id, this.mAplicant).subscribe(() => {
+        this.mApplicant = { ...this.fApplicant.value, "state": this.data.obj.state };
+        this.sApplicant.update(this.data.obj.id, this.mApplicant).subscribe(() => {
             this.msActive.close();
         });
     }

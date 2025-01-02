@@ -1,0 +1,67 @@
+<div class="modal-header">
+    <div class="form-container">
+        <h3 class="title">
+            {{isEditable ? 'Actualizar' : 'Guardar'}}
+        </h3>
+    </div>
+    <button type="button" class="btn-close" (click)="msActive.close()"></button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="fConsultation" (ngSubmit)="submitFunction();">
+        <div class="row mb-4">
+            <div class="col">
+                <label for="inQueryDate">Fecha y hora de registro:</label>
+                <input id="inQueryDate" type="datetime-local" class="form-control" formControlName="queryDate" />
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col">
+                <label for="slctApplicant">Aplicante</label>
+                <select id="slctApplicant" class="form-select" formControlName="applicant">
+                    <option value="" disabled>Seleccionar</option>
+                    <option *ngFor="let opt of optApplicant" [value]="opt.id">
+                        {{opt.surnames}}, {{opt.names}}
+                    </option>
+                </select>
+            </div>
+            <div class="col">
+                <label for="slctCarrera">Carrera:</label>
+                <select id="slctCarrera" class="form-select" formControlName="career">
+                    <option value="" disabled>Seleccionar</option>
+                    <option *ngFor="let opt of optCarrera" [value]="opt.identificador">
+                        {{opt.nombre}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col">
+                <label for="txtQuery">Consulta:</label>
+                <textarea id="txtQuery" class="form-control" formControlName="query"></textarea>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col">
+                <select id="slctAdviser" class="form-select" formControlName="adviser">
+                    <option value="" disabled>Seleccionar</option>
+                    <option *ngFor="let opt of optAdviser" [value]="opt.id">
+                        {{opt.surnames}}, {{opt.names}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col">
+                <label for="txtAnswer">Respuesta:</label>
+                <textarea id="txtAnswer" class="form-control" formControlName="answer"></textarea>
+            </div>
+        </div>
+        <div class="row mb-auto">
+            <div class="col">
+                <button type="submit" class="btn btn-primary" [disabled]="fConsultation.invalid">
+                    {{isEditable ? 'Actualizar' : 'Guardar'}}
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

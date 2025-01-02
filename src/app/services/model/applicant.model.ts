@@ -1,4 +1,4 @@
-export interface TbAplicant {
+export interface TbApplicant {
     id: number | null;
     names: string | null;
     surnames: string | null;
